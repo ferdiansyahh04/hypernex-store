@@ -31,7 +31,9 @@ class ProductController extends BaseController
             return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
         }
 
-        $data['image'] = $this->uploadImage();
+        $data['image'] = $this->handleUpload('image');
+        $data['image_secondary'] = $this->handleUpload('image_secondary', false);
+        
         (new ProductModel())->insert($data);
 
         return redirect()->to('/admin/products')->with('success', 'Product created.');
@@ -64,10 +66,18 @@ class ProductController extends BaseController
             return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
         }
 
-        $image = $this->uploadImage(false);
+        // Handle Primary Image
+        $image = $this->handleUpload('image', false);
         if ($image !== null) {
             $data['image'] = $image;
             $this->deleteImage($product['image']);
+        }
+
+        // Handle Secondary Image
+        $imageSecondary = $this->handleUpload('image_secondary', false);
+        if ($imageSecondary !== null) {
+            $data['image_secondary'] = $imageSecondary;
+            $this->deleteImage($product['image_secondary']);
         }
 
         $model->update($id, $data);
@@ -82,6 +92,7 @@ class ProductController extends BaseController
 
         if ($product) {
             $this->deleteImage($product['image']);
+            $this->deleteImage($product['image_secondary']);
             $model->delete($id);
         }
 
@@ -96,6 +107,7 @@ class ProductController extends BaseController
             'price' => 'required|numeric|greater_than_equal_to[0]',
             'stock' => 'required|integer|greater_than_equal_to[0]',
             'image' => 'permit_empty|is_image[image]|mime_in[image,image/jpg,image/jpeg,image/png,image/webp]|max_size[image,2048]',
+            'image_secondary' => 'permit_empty|is_image[image_secondary]|mime_in[image_secondary,image/jpg,image/jpeg,image/png,image/webp]|max_size[image_secondary,2048]',
         ];
 
         if (! $this->validate($rules)) {
@@ -110,12 +122,12 @@ class ProductController extends BaseController
         ];
     }
 
-    private function uploadImage(bool $required = true): ?string
+    private function handleUpload(string $fieldName, bool $useDefault = true): ?string
     {
-        $file = $this->request->getFile('image');
+        $file = $this->request->getFile($fieldName);
 
         if (! $file || ! $file->isValid()) {
-            return $required ? 'default-product.svg' : null;
+            return $useDefault ? 'default-product.svg' : null;
         }
 
         $name = $file->getRandomName();

@@ -27,64 +27,79 @@ if ($product['image'] === 'default-product.svg' || empty($product['image'])) {
 }
 ?>
 
-<section class="container py-5" style="min-height: 80vh; display: flex; align-items: center;">
-    <div class="row g-5 align-items-center">
-        <div class="col-lg-6">
-            <div class="product-detail-media" data-aos="zoom-in">
-                <img src="<?= $productImage ?>" alt="<?= esc($product['name']) ?>">
+<div class="container-fluid px-0 border-bottom border-dark">
+    <div class="row g-0">
+        <!-- Left Side: Scrolling Images -->
+        <div class="col-lg-7 d-flex flex-column">
+            <div class="w-100 p-0 p-lg-5 border-bottom border-dark" data-aos="fade-in">
+                <img src="<?= $productImage ?>" alt="<?= esc($product['name']) ?>" class="img-fluid w-100" style="object-fit: cover;">
+            </div>
+            <!-- Additional images to create scroll length -->
+            <div class="w-100 p-0 p-lg-5 border-bottom border-dark bg-white">
+                <img src="<?= $productImage ?>" alt="<?= esc($product['name']) ?>" class="img-fluid w-100" style="object-fit: cover; filter: grayscale(100%); opacity: 0.5;">
+            </div>
+            <div class="w-100 p-0 p-lg-5 bg-light">
+                <img src="<?= $productImage ?>" alt="<?= esc($product['name']) ?>" class="img-fluid w-100" style="object-fit: cover; transform: scale(0.8) rotate(-5deg);">
             </div>
         </div>
         
-        <div class="col-lg-6">
-            <div class="product-detail-info">
-                <nav aria-label="breadcrumb" class="mb-4">
+        <!-- Right Side: Sticky Product Details -->
+        <div class="col-lg-5 border-start border-dark position-relative">
+            <div class="sticky-top p-4 p-md-5 d-flex flex-column" style="top: 100px; height: fit-content;">
+
+                <nav aria-label="breadcrumb" class="mb-5">
                     <ol class="breadcrumb mb-0">
-                        <li class="breadcrumb-item"><a href="<?= base_url('/') ?>" class="text-secondary text-decoration-none small">Home</a></li>
-                        <li class="breadcrumb-item"><a href="<?= base_url('/collection') ?>" class="text-secondary text-decoration-none small">Collection</a></li>
-                        <li class="breadcrumb-item active text-white small" aria-current="page"><?= esc($product['name']) ?></li>
+                        <li class="breadcrumb-item"><a href="<?= base_url('/') ?>" class="text-muted text-decoration-none text-uppercase" style="font-size: 0.65rem; letter-spacing: 0.1em; font-family: 'Space Grotesk', sans-serif;">Archive</a></li>
+                        <li class="breadcrumb-item active text-dark text-uppercase" aria-current="page" style="font-size: 0.65rem; letter-spacing: 0.1em; font-family: 'Space Grotesk', sans-serif; opacity: 0.5;"><?= esc($product['name']) ?></li>
                     </ol>
                 </nav>
                 
-                <div class="mb-2">
-                    <span class="eyebrow">Hypernex Elite Series</span>
-                </div>
-                <h1 class="detail-title"><?= esc($product['name']) ?></h1>
+                <h1 style="font-family: 'Space Grotesk', sans-serif; font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 700; line-height: 1; letter-spacing: -0.04em; color: var(--primary); text-transform: uppercase; margin-bottom: 1.5rem;">
+                    <?= esc($product['name']) ?>
+                </h1>
                 
-                <div class="d-flex align-items-center gap-3 mb-4">
-                    <div class="detail-price mb-0">Rp <?= number_format((float) $product['price'], 0, ',', '.') ?></div>
-                    <div class="stock-chip mb-0">
-                        <i class="bi bi-box-seam"></i>
-                        <?= esc($product['stock']) ?> units in stock
+                <div class="d-flex align-items-end justify-content-between mb-4 pb-4 border-bottom border-dark">
+                    <div class="font-serif fs-2" style="font-style: italic;">Rp <?= number_format((float) $product['price'], 0, ',', '.') ?></div>
+                    <div class="text-uppercase text-muted" style="font-family: 'Space Grotesk', sans-serif; font-size: 0.7rem; letter-spacing: 0.1em;">
+                        <?= esc($product['stock']) ?> units in vault
                     </div>
                 </div>
                 
                 <div class="mb-5">
-                    <h2 class="h6 text-white text-uppercase tracking-wider mb-3">Description</h2>
-                    <p class="text-secondary lh-lg" style="font-size: 1.1rem;">
-                        <?= esc($product['description']) ?>
-                    </p>
+                    <div class="text-uppercase text-muted small fw-bold mb-3" style="font-family: 'Space Grotesk', sans-serif; letter-spacing: 0.1em;">Technical Specifications</div>
+                    <div class="text-secondary" style="line-height: 1.8; font-size: 1rem;">
+                        <?= nl2br(esc($product['description'])) ?>
+                    </div>
                 </div>
                 
-                <form action="<?= base_url('/cart/add/' . $product['id']) ?>" method="post">
-                    <?= csrf_field() ?>
-                    <div class="d-grid d-md-flex gap-3">
-                        <button class="btn btn-primary-glow px-5 py-3" type="submit" <?= (int) $product['stock'] < 1 ? 'disabled' : '' ?>>
-                            <i class="bi bi-cart-plus fs-5 me-2"></i>
-                            Add to Elite Cart
-                        </button>
-                        <a href="<?= base_url('/collection') ?>" class="btn btn-soft px-5 py-3">
-                            Back to Store
-                        </a>
+                <div class="mt-auto pt-5">
+                    <?php if ((int) $product['stock'] < 1): ?>
+                        <div class="bg-dark text-white text-center py-3 text-uppercase fw-bold" style="font-family: 'Space Grotesk', sans-serif; letter-spacing: 0.1em;">Vault Empty / Sold Out</div>
+                    <?php else: ?>
+                        <form action="<?= base_url('/cart/add/' . $product['id']) ?>" method="post" class="ajax-add-to-cart">
+                            <?= csrf_field() ?>
+                            <button type="submit" class="btn btn-dark w-100 py-3 rounded-0 text-uppercase fw-bold d-flex justify-content-between px-4" style="font-family: 'Space Grotesk', sans-serif; letter-spacing: 0.1em;">
+                                <span class="btn-text">Add to Bag</span>
+                                <span class="btn-icon">→</span>
+                            </button>
+                        </form>
+                    <?php endif; ?>
+                    
+                    <div class="d-flex justify-content-between mt-4 text-uppercase text-muted" style="font-size: 0.6rem; letter-spacing: 0.15em; font-family: 'Space Grotesk', sans-serif; font-weight: 700;">
+                        <span>✦ Complimentary Shipping</span>
+                        <span>✦ Secure Encryption</span>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>
-</section>
+</div>
 
-<style>
-    .breadcrumb-item + .breadcrumb-item::before {
-        color: rgba(255,255,255,0.2);
-    }
-</style>
+
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({ duration: 800, once: true });
+</script>
+
 <?= $this->endSection() ?>

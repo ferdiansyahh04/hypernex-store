@@ -20,6 +20,9 @@ class CartController extends BaseController
         $product = (new ProductModel())->find($productId);
 
         if (! $product || (int) $product['stock'] < 1) {
+            if ($this->request->isAJAX()) {
+                return $this->response->setJSON(['status' => 'error', 'message' => 'Product unavailable.']);
+            }
             return redirect()->back()->with('error', 'Product unavailable.');
         }
 
@@ -27,18 +30,19 @@ class CartController extends BaseController
         $current = (int) ($cart[$productId] ?? 0);
         $cart[$productId] = min($current + 1, (int) $product['stock']);
         session()->set('cart', $cart);
-        $totalItems = array_sum($cart);
 
         if ($this->request->isAJAX()) {
             return $this->response->setJSON([
                 'status' => 'success',
-                'message' => 'Added to cart.',
-                'cartCount' => $totalItems
+                'message' => 'Added to selection.',
+                'cartCount' => array_sum($cart),
+                'html' => view('partials/offcanvas_cart')
             ]);
         }
 
         return redirect()->back()->with('success', 'Added to cart.');
     }
+
 
     public function update()
     {
@@ -65,6 +69,15 @@ class CartController extends BaseController
         $cart = session('cart') ?? [];
         unset($cart[$productId]);
         session()->set('cart', $cart);
+
+        if ($this->request->isAJAX()) {
+            return $this->response->setJSON([
+                'status' => 'success',
+                'message' => 'Removed from selection.',
+                'cartCount' => array_sum($cart),
+                'html' => view('partials/offcanvas_cart')
+            ]);
+        }
 
         return redirect()->to('/cart')->with('success', 'Item removed.');
     }

@@ -10,5 +10,5 @@ class ProductModel extends Model
     protected $primaryKey = 'id';
     protected $returnType = 'array';
     protected $useTimestamps = true;
-    protected $allowedFields = ['name', 'description', 'price', 'stock', 'image'];
+    protected $allowedFields = ['name', 'description', 'price', 'stock', 'image', 'image_secondary'];
 }

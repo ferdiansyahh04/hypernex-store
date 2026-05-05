@@ -8,14 +8,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@400;500;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <link href="<?= base_url('assets/css/app.css') ?>" rel="stylesheet">
     <meta name="<?= csrf_token() ?>" content="<?= csrf_hash() ?>" id="csrf-token">
 </head>
-<body class="bg-dark text-light">
-    <div class="noise-overlay"></div>
-    <div class="hero-glow-focal"></div>
-    
+<body>
     <?= $this->include('partials/nav') ?>
 
     <main>

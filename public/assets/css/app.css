@@ -6,16 +6,16 @@
 */
 
 :root {
-  /* NuPhy Elite Palette */
-  --bg-dark: #0d0d0d;
-  --bg-panel: #1a1a1a;
-  --primary: #d4ff37; /* NuPhy Lime */
-  --primary-glow: rgba(212, 255, 55, 0.15);
-  --text-primary: #ffffff;
-  --text-secondary: #a3a3a3;
+  /* Odd Ritual Exact Palette */
+  --bg-dark: #f2f2f2;
+  --bg-panel: #ffffff;
+  --primary: #000000;
+  --primary-glow: transparent;
+  --text-primary: #000000;
+  --text-secondary: #333333;
   --text-muted: #666666;
-  --border: rgba(255, 255, 255, 0.08);
-  --glass: rgba(13, 13, 13, 0.8);
+  --border: #000000;
+  --glass: #f2f2f2;
 
   /* Spacing Scale */
   --space-1: 8px;
@@ -27,13 +27,13 @@
   --space-10: 80px;
 
   /* Constraints */
-  --container-width: 1200px;
-  --radius-lg: 24px;
-  --radius-md: 12px;
-  --radius-pill: 100px;
+  --container-width: 1400px;
+  --radius-lg: 0px;
+  --radius-md: 0px;
+  --radius-pill: 0px;
 
   /* Transitions */
-  --transition-base: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  --transition-base: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* Base Stabilization */
@@ -41,16 +41,16 @@ html, body {
   background-color: var(--bg-dark);
   color: var(--text-primary);
   font-family: 'Inter', -apple-system, sans-serif;
-  line-height: 1.5;
+  line-height: 1.6;
   margin: 0;
-  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
 
 h1, h2, h3, h4, .font-heading {
-  font-family: 'Outfit', sans-serif;
-  font-weight: 700;
-  letter-spacing: -0.02em;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
 }
 
 /* Subtle Noise Texture */
@@ -73,14 +73,9 @@ body::after {
   transform: scale(0.97) translateY(0) !important;
 }
 
-/* Background Gradients (Simplified) */
+/* Background Gradients (Removed for Minimalist feel) */
 .bg-glow-container, .hero-glow-focal, .noise-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none !important;
-  background: radial-gradient(circle at 10% 10%, rgba(99, 102, 241, 0.05) 0%, transparent 40%),
-              radial-gradient(circle at 90% 0%, rgba(139, 92, 246, 0.05) 0%, transparent 40%);
+  display: none;
 }
 
 /* Layout System */
@@ -153,33 +148,32 @@ h3 {
 }
 
 .vp-nav .nav-link.active {
-  color: #8b5cf6;
-  text-shadow: 0 0 12px rgba(139, 92, 246, 0.3);
+  color: var(--primary);
 }
 
 .vp-nav .bi {
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--primary);
   transition: all 0.25s ease;
 }
 
 .vp-nav .btn-ghost:hover .bi,
 .vp-nav .nav-link:hover .bi {
-  color: #ffffff;
+  color: #000;
 }
 
-/* Premium Buttons - NuPhy Style */
+/* Premium Buttons - Editorial Style */
 .btn-primary-glow {
   background: var(--primary);
-  color: #000;
-  border: none;
-  padding: 14px 32px;
-  border-radius: var(--radius-pill);
-  font-weight: 700;
-  font-family: 'Outfit', sans-serif;
+  color: var(--bg-dark);
+  border: 1px solid var(--primary);
+  padding: 16px 36px;
+  border-radius: var(--radius-md);
+  font-weight: 500;
+  font-family: 'Space Grotesk', sans-serif;
   transition: var(--transition-base);
   text-transform: uppercase;
-  font-size: 0.875rem;
-  letter-spacing: 0.05em;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -187,49 +181,51 @@ h3 {
 }
 
 .btn-primary-glow:hover {
-  transform: translateY(-2px);
-  background: #e1ff66;
-  box-shadow: 0 10px 30px rgba(212, 255, 55, 0.3);
-  color: #000;
+  background: transparent;
+  color: var(--primary);
 }
 
 .btn-soft {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #fff;
-  padding: 14px 32px;
-  border-radius: var(--radius-pill);
-  font-weight: 600;
-  transition: var(--transition-base);
-  text-decoration: none;
+  background: transparent;
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  padding: 16px 36px;
+  border-radius: var(--radius-md);
+  font-weight: 500;
+  font-family: 'Space Grotesk', sans-serif;
+  transition: none;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  text-decoration: none;
 }
 
 .btn-soft:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
-  border-color: rgba(255, 255, 255, 0.2);
+  background: var(--primary);
+  color: var(--bg-dark);
 }
 
 .btn-soft.btn-sm {
-  padding: 8px 20px;
-  font-size: 0.8125rem;
+  padding: 10px 24px;
+  font-size: 0.75rem;
 }
 
-/* Navbar NuPhy Style */
+/* Navbar Editorial Style */
 .vp-nav {
-  padding: 24px 0;
+  padding: 32px 0;
   transition: all 0.4s ease;
   background: transparent;
+  border-bottom: 1px solid transparent;
 }
 
 .vp-nav.scrolled {
-  background: rgba(13, 13, 13, 0.8);
+  background: var(--glass);
   backdrop-filter: blur(20px);
-  padding: 16px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border);
 }
 
 .navbar-brand .brand-mark i {
@@ -238,8 +234,10 @@ h3 {
 }
 
 .nav-link {
-  font-size: 0.9375rem;
+  font-size: 0.85rem;
   font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
   color: var(--text-secondary) !important;
   transition: color 0.3s ease;
   padding: 8px 0 !important;
@@ -247,7 +245,7 @@ h3 {
 }
 
 .nav-link:hover, .nav-link.active {
-  color: #fff !important;
+  color: var(--primary) !important;
 }
 
 .nav-link::after {
@@ -256,7 +254,7 @@ h3 {
   bottom: 0;
   left: 0;
   width: 0;
-  height: 2px;
+  height: 1px;
   background: var(--primary);
   transition: width 0.3s ease;
 }
@@ -307,86 +305,84 @@ h3 {
   color: #fff;
 }
 
-/* Feature Cards NuPhy Style */
+/* Feature Blocks Editorial Style */
 .feature-card {
-  background: var(--bg-panel);
-  border: 1px solid var(--border);
-  padding: 3rem 2rem;
-  border-radius: var(--radius-lg);
-  text-align: center;
-  transition: var(--transition-base);
+  padding: 2rem 0;
+  text-align: left;
+  border-top: 1px solid var(--border);
+  border-radius: 0;
+  background: transparent;
 }
 
 .feature-card:hover {
-  border-color: rgba(212, 255, 55, 0.3);
-  transform: translateY(-8px);
+  border-color: var(--primary);
+  transform: none;
 }
 
 .feature-icon {
-  width: 64px;
-  height: 64px;
-  background: rgba(255, 255, 255, 0.03);
-  border-radius: 16px;
+  width: 48px;
+  height: 48px;
+  background: transparent;
   display: flex;
   align-items: center;
-  justify-content: center;
-  margin: 0 auto 2rem;
-  font-size: 1.75rem;
+  justify-content: flex-start;
+  margin: 0 0 1rem;
+  font-size: 2rem;
   color: var(--primary);
 }
 
 .feature-card h3 {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-  color: #fff;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: var(--primary);
+  font-weight: 700;
+  font-family: 'Space Grotesk', sans-serif;
+  text-transform: uppercase;
 }
 
 .feature-card p {
   color: var(--text-secondary);
-  font-size: 0.9375rem;
+  font-size: 0.95rem;
   line-height: 1.6;
   margin-bottom: 0;
 }
 
-/* Product Cards NuPhy Style */
+/* Product Cards Editorial Style */
 .product-card {
-  background: var(--bg-panel);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
+  background: transparent;
+  border: none;
+  border-radius: 0;
   transition: var(--transition-base);
   height: 100%;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
   position: relative;
 }
 
 .product-card:hover {
-  transform: translateY(-8px);
-  border-color: rgba(212, 255, 55, 0.3);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  transform: none;
 }
 
 .product-media-container {
-  aspect-ratio: 1/1;
+  aspect-ratio: 4/5;
   overflow: hidden;
   position: relative;
-  background: #000;
+  background: #f0f0f0;
 }
 
 .product-media img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.4s ease;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .product-card:hover .product-media img {
-  transform: scale(1.05);
+  transform: scale(1.03);
 }
 
 .product-body {
-  padding: 1.5rem;
+  padding: 1rem 0;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -394,15 +390,15 @@ h3 {
 
 .product-body .text-muted {
   color: var(--text-secondary) !important;
-  opacity: 0.8;
+  opacity: 1;
   line-height: 1.5;
 }
 
 .product-price .text-muted {
   color: var(--primary) !important;
-  opacity: 0.7;
-  font-weight: 600;
-  letter-spacing: 0.05em;
+  opacity: 1;
+  font-weight: 400;
+  font-family: 'Space Grotesk', sans-serif;
 }
 
 /* Section Spacing */
@@ -411,21 +407,25 @@ h3 {
 }
 
 .eyebrow {
-  color: var(--primary);
+  color: var(--text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.15em;
-  font-weight: 700;
+  letter-spacing: 0.1em;
+  font-weight: 500;
   font-size: 0.75rem;
-  margin-bottom: var(--space-2);
+  margin-bottom: var(--space-4);
   display: block;
+  font-family: 'Space Grotesk', sans-serif;
 }
 
 /* Benefit Cards */
 .benefit-card {
-  background: var(--bg-panel);
-  border: 1px solid var(--border);
-  padding: var(--space-4);
-  border-radius: var(--radius-lg);
+  background: transparent;
+  border-top: 1px solid var(--border);
+  border-left: none;
+  border-right: none;
+  border-bottom: none;
+  padding: var(--space-4) 0;
+  border-radius: 0;
   transition: var(--transition-base);
 }
 
@@ -438,21 +438,208 @@ h3 {
 
 /* Showcase Section Refinement */
 .showcase-block {
-  background: linear-gradient(135deg, var(--bg-panel), var(--bg-dark));
-  border: 1px solid var(--border);
-  border-radius: var(--space-4);
-  padding: var(--space-8);
+  background: transparent;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  border-radius: 0;
+  padding: var(--space-8) 0;
 }
 
 /* CTA Refinement */
 .landing-cta {
-  background: linear-gradient(135deg, #1e1b4b, var(--bg-dark));
+  background: transparent;
   border: 1px solid var(--border);
   padding: var(--space-10) var(--space-4);
-  border-radius: var(--space-4);
+  border-radius: 0;
   text-align: center;
   position: relative;
   overflow: hidden;
+}
+
+/* ===== ODD RITUAL SECTIONS ===== */
+
+/* Marquee Ticker Strip */
+.or-marquee {
+  overflow: hidden;
+  white-space: nowrap;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 18px 0;
+  background: var(--bg-dark);
+}
+
+.or-marquee-track {
+  display: inline-flex;
+  animation: marquee-scroll 25s linear infinite;
+}
+
+.or-marquee-track span {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--primary);
+  padding: 0 2rem;
+}
+
+@keyframes marquee-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Brand Story Split */
+.or-split {
+  display: flex;
+  min-height: 80vh;
+  border-bottom: 1px solid var(--border);
+}
+
+.or-split-media {
+  width: 50%;
+  overflow: hidden;
+  position: relative;
+}
+
+.or-split-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.or-split-media:hover img {
+  transform: scale(1.03);
+}
+
+.or-split-content {
+  width: 50%;
+  padding: 5rem 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-left: 1px solid var(--border);
+}
+
+.or-split.reversed .or-split-content {
+  border-left: none;
+  border-right: 1px solid var(--border);
+}
+
+.or-split-eyebrow {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+}
+
+.or-split-text {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  margin-bottom: 2.5rem;
+  max-width: 480px;
+}
+
+.or-split-link {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--primary);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: gap 0.3s ease;
+}
+
+.or-split-link:hover {
+  gap: 1rem;
+  color: var(--primary);
+}
+
+/* Full-Width Image Block */
+.or-fullwidth-img {
+  width: 100%;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+}
+
+.or-fullwidth-img img {
+  width: 100%;
+  height: 70vh;
+  object-fit: cover;
+  display: block;
+}
+
+/* Hero Slide Indicators */
+.or-hero-indicators {
+  position: absolute;
+  bottom: 3vh;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  gap: 4rem;
+  align-items: center;
+}
+
+.or-hero-indicators span {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.05em;
+  font-style: italic;
+}
+
+.or-hero-indicators span.active {
+  color: #fff;
+}
+
+.or-hero-scroll {
+  position: absolute;
+  bottom: 3vh;
+  right: 4rem;
+  z-index: 3;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.7);
+  font-style: italic;
+  letter-spacing: 0.05em;
+}
+
+/* Responsive Brand Split */
+@media (max-width: 991px) {
+  .or-split {
+    flex-direction: column;
+    min-height: auto;
+  }
+  .or-split.reversed {
+    flex-direction: column-reverse;
+  }
+  .or-split-media, .or-split-content {
+    width: 100%;
+  }
+  .or-split-media {
+    height: 50vh;
+  }
+  .or-split-content {
+    padding: 3rem 1.5rem;
+    border-left: none !important;
+    border-right: none !important;
+    border-top: 1px solid var(--border);
+  }
+  .or-split.reversed .or-split-content {
+    border-top: none;
+    border-bottom: 1px solid var(--border);
+  }
 }
 
 /* Helpers */
@@ -1134,4 +1321,221 @@ h3 {
   .admin-sidebar {
     display: none;
   }
+}
+/* 
+  =========================================
+  EDITORIAL & INTERACTIVE ENHANCEMENTS
+  =========================================
+*/
+
+.font-serif {
+    font-family: 'Cormorant Garamond', serif !important;
+    font-style: italic;
+}
+
+/* Smooth Link Transitions */
+.nav-link, .or-split-link, .footer-link {
+    transition: var(--transition-base);
+}
+
+/* Product Card Advanced Zoom */
+.product-card .product-media-container {
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+}
+
+.product-card .product-media img {
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.product-card:hover .product-media img {
+    transform: scale(1.1);
+}
+
+/* Side Cart (Offcanvas) Styling */
+.offcanvas-cart {
+    width: 450px !important;
+    background-color: var(--bg-dark) !important;
+    border-left: 1px solid var(--border) !important;
+}
+
+.offcanvas-header {
+    border-bottom: 1px solid var(--border);
+    padding: 2rem;
+}
+
+.offcanvas-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.offcanvas-body {
+    padding: 2rem;
+}
+
+.cart-item {
+    display: flex;
+    gap: 1.5rem;
+    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.cart-item-img {
+    width: 80px;
+    height: 100px;
+    background: #fff;
+    border: 1px solid var(--border);
+    overflow: hidden;
+}
+
+.cart-item-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cart-item-info {
+    flex: 1;
+}
+
+.cart-item-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    margin-bottom: 0.25rem;
+}
+
+.cart-item-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+}
+
+.offcanvas-footer {
+    padding: 2rem;
+    border-top: 1px solid var(--border);
+}
+
+/* Utility: Brutalist Borders */
+.border-brutalist {
+    border: 1px solid var(--border) !important;
+}
+
+.border-x-brutalist {
+    border-left: 1px solid var(--border) !important;
+    border-right: 1px solid var(--border) !important;
+}
+
+/* Mobile Responsive Adjustments */
+@media (max-width: 576px) {
+    .offcanvas-cart {
+        width: 100% !important;
+    }
+}
+/* 
+  =========================================
+  ELITE ADMIN DASHBOARD STYLES
+  =========================================
+*/
+
+.admin-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.stat-card {
+    background: #000;
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-card-label {
+    font-family: 'Space Grotesk', sans-serif;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 0.5rem;
+}
+
+.stat-card-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    font-family: 'Space Grotesk', sans-serif;
+    letter-spacing: -0.02em;
+}
+
+.admin-table-wrap {
+    background: #000;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.admin-table th {
+    font-family: 'Space Grotesk', sans-serif;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.4);
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    text-align: left;
+}
+
+.admin-table td {
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    vertical-align: center;
+}
+
+.admin-product-item {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.admin-product-img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    background: #fff;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.status-pill {
+    font-family: 'Space Grotesk', sans-serif;
+    text-transform: uppercase;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    padding: 6px 12px;
+    border-radius: 2px;
+}
+
+.status-pill.in-stock { background: #e6f7ef; color: #008a4f; border: 1px solid rgba(0, 138, 79, 0.1); }
+.status-pill.low-stock { background: #fff8e6; color: #b27b00; border: 1px solid rgba(178, 123, 0, 0.1); }
+.status-pill.out-of-stock { background: #ffebee; color: #d32f2f; border: 1px solid rgba(211, 47, 47, 0.1); }
+
+.btn-soft {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: #fff;
+    transition: all 0.3s ease;
+}
+
+.btn-soft:hover {
+    background: #fff;
+    color: #000;
 }

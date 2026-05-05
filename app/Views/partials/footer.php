@@ -1,54 +1,50 @@
-<footer class="nuphy-footer">
-    <div class="container">
-        <div class="footer-grid">
-            <div>
-                <h4 class="footer-heading">Navigation</h4>
-                <ul class="footer-links">
-                    <li><a href="<?= base_url('/products') ?>">Products</a></li>
-                    <li><a href="<?= base_url('/collection') ?>">Store</a></li>
-                    <li><a href="#">Support</a></li>
+<footer style="padding-top: 80px; padding-bottom: 40px; background-color: var(--bg-dark);">
+    <div class="container-fluid px-4 px-lg-5">
+        
+        <!-- Brand Block -->
+        <div class="text-center mb-5 pb-5 border-bottom border-dark">
+            <h2 style="font-family: 'Space Grotesk', sans-serif; font-size: clamp(3rem, 8vw, 6rem); font-weight: 700; line-height: 1; letter-spacing: -0.05em; text-transform: uppercase; color: var(--primary); margin-bottom: 1rem;">HYPERNEX</h2>
+            <p class="text-uppercase mb-0" style="font-family: 'Space Grotesk', sans-serif; font-size: 0.75rem; letter-spacing: 0.15em; color: var(--text-muted);">A Modern Expression of Precision</p>
+        </div>
+        
+        <!-- 4-Column Grid (Matching Odd Ritual) -->
+        <div class="row g-0">
+            <div class="col-md-3 pe-md-4 mb-4 mb-md-0">
+                <h4 class="text-uppercase fw-bold pb-3 mb-3 border-bottom border-dark" style="font-size: 0.7rem; letter-spacing: 0.15em; font-family: 'Space Grotesk', sans-serif;">Site Index</h4>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><a href="<?= base_url('/collection') ?>" class="text-dark text-decoration-none text-uppercase" style="font-size: 0.8rem; font-family: 'Space Grotesk', sans-serif; letter-spacing: 0.05em;">Shop Now</a></li>
+                    <li class="mb-2"><a href="<?= base_url('/') ?>" class="text-dark text-decoration-none text-uppercase" style="font-size: 0.8rem; font-family: 'Space Grotesk', sans-serif; letter-spacing: 0.05em;">Home</a></li>
+                    <li class="mb-2"><a href="#" class="text-dark text-decoration-none text-uppercase" style="font-size: 0.8rem; font-family: 'Space Grotesk', sans-serif; letter-spacing: 0.05em;">About Us</a></li>
+                    <li class="mb-2"><a href="#" class="text-dark text-decoration-none text-uppercase" style="font-size: 0.8rem; font-family: 'Space Grotesk', sans-serif; letter-spacing: 0.05em;">Contact Us</a></li>
                 </ul>
             </div>
-            <div>
-                <h4 class="footer-heading">About</h4>
-                <ul class="footer-links">
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">Forum</a></li>
+            <div class="col-md-3 pe-md-4 mb-4 mb-md-0">
+                <h4 class="text-uppercase fw-bold pb-3 mb-3 border-bottom border-dark" style="font-size: 0.7rem; letter-spacing: 0.15em; font-family: 'Space Grotesk', sans-serif;">Social</h4>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><a href="#" class="text-dark text-decoration-none text-uppercase" style="font-size: 0.8rem; font-family: 'Space Grotesk', sans-serif; letter-spacing: 0.05em;">Instagram</a></li>
                 </ul>
             </div>
-            <div>
-                <h4 class="footer-heading">Social</h4>
-                <ul class="footer-links">
-                    <li><a href="#">Facebook</a></li>
-                    <li><a href="#">Instagram</a></li>
-                    <li><a href="#">X - Twitter</a></li>
+            <div class="col-md-3 pe-md-4 mb-4 mb-md-0">
+                <h4 class="text-uppercase fw-bold pb-3 mb-3 border-bottom border-dark" style="font-size: 0.7rem; letter-spacing: 0.15em; font-family: 'Space Grotesk', sans-serif;">Get in Touch</h4>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><a href="mailto:hello@hypernex.test" class="text-dark text-decoration-none text-uppercase" style="font-size: 0.8rem; font-family: 'Space Grotesk', sans-serif; letter-spacing: 0.05em;">hello@hypernex.store</a></li>
                 </ul>
             </div>
-            <div>
-                <h4 class="footer-heading">Get in Touch</h4>
-                <ul class="footer-links">
-                    <li><a href="mailto:hello@hypernex.test">hello@hypernex.test</a></li>
+            <div class="col-md-3 mb-4 mb-md-0">
+                <h4 class="text-uppercase fw-bold pb-3 mb-3 border-bottom border-dark" style="font-size: 0.7rem; letter-spacing: 0.15em; font-family: 'Space Grotesk', sans-serif;">Legal</h4>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><a href="#" class="text-dark text-decoration-none text-uppercase" style="font-size: 0.8rem; font-family: 'Space Grotesk', sans-serif; letter-spacing: 0.05em;">Privacy Policy</a></li>
+                    <li class="mb-2"><a href="#" class="text-dark text-decoration-none text-uppercase" style="font-size: 0.8rem; font-family: 'Space Grotesk', sans-serif; letter-spacing: 0.05em;">Refunds</a></li>
+                    <li class="mb-2"><a href="#" class="text-dark text-decoration-none text-uppercase" style="font-size: 0.8rem; font-family: 'Space Grotesk', sans-serif; letter-spacing: 0.05em;">Shipping</a></li>
+                    <li class="mb-2"><a href="#" class="text-dark text-decoration-none text-uppercase" style="font-size: 0.8rem; font-family: 'Space Grotesk', sans-serif; letter-spacing: 0.05em;">Terms of Service</a></li>
                 </ul>
-            </div>
-            <div class="footer-newsletter">
-                <h4 class="newsletter-title text-white">Join Our Community</h4>
-                <p class="newsletter-copy">Get updates, tips, and early access to new releases.</p>
-                <form class="newsletter-form">
-                    <input type="email" placeholder="Your Email">
-                    <button type="submit"><i class="bi bi-arrow-right-short"></i></button>
-                </form>
             </div>
         </div>
         
-        <div class="footer-bottom">
-            <div class="footer-logo">Hypernex®</div>
-            <div class="d-flex flex-column align-items-end gap-3">
-                <div class="footer-legal">
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms & Conditions</a>
-                </div>
-                <div class="text-muted small">&copy; <?= date('Y') ?> Hypernex, Inc. All rights reserved</div>
+        <!-- Bottom Row -->
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mt-5 pt-4 border-top border-dark">
+            <div class="text-uppercase fw-bold" style="font-size: 0.7rem; letter-spacing: 0.1em; font-family: 'Space Grotesk', sans-serif;">
+                All Rights Reserved _ Hypernex&copy;<?= date('Y') ?>
             </div>
         </div>
     </div>

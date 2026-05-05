@@ -3,35 +3,19 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Smooth Scrolling for Navigation
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            const href = this.getAttribute('href');
-            if (href === '#') return;
-            
-            const target = document.querySelector(href);
-            if (target) {
-                e.preventDefault();
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        });
-    });
-
-    // 2. AJAX Add to Cart
-    const cartForms = document.querySelectorAll('form[action*="/cart/add"]');
+    // 1. AJAX Add to Bag
+    const cartForms = document.querySelectorAll('.ajax-add-to-cart');
     cartForms.forEach(form => {
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const btn = this.querySelector('button');
-            const originalContent = btn.innerHTML;
+            const btnText = btn.querySelector('.btn-text');
+            const originalText = btnText.innerHTML;
             const url = this.getAttribute('action');
             
             // Loading State
-            btn.innerHTML = '<div class="spinner-border spinner-border-sm" role="status"></div>';
+            btnText.innerHTML = 'ADDING...';
             btn.classList.add('disabled');
             
             try {
@@ -51,43 +35,81 @@ document.addEventListener('DOMContentLoaded', () => {
                 const data = await response.json();
                 
                 if (data.status === 'success') {
-                    showNotification(data.message, 'success');
-                    // Update Cart Pill
-                    const pill = document.querySelector('.cart-pill');
-                    if (pill) {
-                        pill.textContent = data.cartCount;
-                        pill.classList.add('pulse');
-                        setTimeout(() => pill.classList.remove('pulse'), 500);
-                    } else {
-                        // If no pill exists, reload to show it or create it
-                        window.location.reload(); 
+                    // Update Bag Count in Nav
+                    const bagCounts = document.querySelectorAll('[data-bs-target="#offcanvasCart"] .ms-1');
+                    bagCounts.forEach(el => el.textContent = `(${data.cartCount})`);
+
+                    // Update Offcanvas Content
+                    const offcanvasEl = document.getElementById('offcanvasCart');
+                    if (offcanvasEl && data.html) {
+                        // Replace the entire offcanvas content or just the body?
+                        // For simplicity, let's replace the innerHTML of the offcanvas
+                        offcanvasEl.innerHTML = new DOMParser().parseFromString(data.html, 'text/html').getElementById('offcanvasCart').innerHTML;
+                        
+                        // Show the offcanvas
+                        const bsOffcanvas = bootstrap.Offcanvas.getOrCreateInstance(offcanvasEl);
+                        bsOffcanvas.show();
                     }
                 } else {
-                    showNotification(data.message || 'Error adding to cart', 'error');
+                    showNotification(data.message || 'Error adding to bag', 'error');
                 }
             } catch (err) {
                 console.error(err);
                 showNotification('Network error occurred', 'error');
             } finally {
-                btn.innerHTML = originalContent;
+                btnText.innerHTML = originalText;
                 btn.classList.remove('disabled');
             }
         });
     });
 
-    // 3. Navbar scroll effect
-    const mainNav = document.getElementById('mainNavbar');
-    if (mainNav) {
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                mainNav.classList.add('scrolled');
-            } else {
-                mainNav.classList.remove('scrolled');
-            }
-        });
-    }
+    // 2. AJAX Remove from Bag
+    document.addEventListener('click', async function(e) {
+        if (e.target.closest('.remove-item')) {
+            const btn = e.target.closest('.remove-item');
+            const productId = btn.getAttribute('data-id');
+            
+            // Show loading state
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = '<i class="bi bi-hourglass-split"></i>';
+            btn.classList.add('disabled');
+            
+            try {
+                const csrfMeta = document.getElementById('csrf-token');
+                const csrfToken = csrfMeta ? csrfMeta.content : '';
 
-    // 4. Notification System
+                const response = await fetch(`${window.location.origin}/cart/remove/${productId}`, {
+                    method: 'POST',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-CSRF-TOKEN': csrfToken
+                    }
+                });
+                
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    // Update Bag Count in Nav
+                    const bagCounts = document.querySelectorAll('[data-bs-target="#offcanvasCart"] .ms-1');
+                    bagCounts.forEach(el => el.textContent = `(${data.cartCount})`);
+
+                    // Update Offcanvas Content
+                    const offcanvasEl = document.getElementById('offcanvasCart');
+                    if (offcanvasEl && data.html) {
+                        offcanvasEl.innerHTML = new DOMParser().parseFromString(data.html, 'text/html').getElementById('offcanvasCart').innerHTML;
+                        showNotification('Item removed from selection');
+                    }
+                }
+            } catch (err) {
+                console.error(err);
+                btn.innerHTML = originalHTML;
+                btn.classList.remove('disabled');
+                showNotification('Could not remove item', 'error');
+            }
+        }
+    });
+
+    // 3. Notification System
     function showNotification(message, type = 'success') {
         let container = document.querySelector('.notification-container');
         if (!container) {
@@ -115,14 +137,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 3000);
     }
 
-    // 5. Dead Link Fallback
-    document.querySelectorAll('a').forEach(el => {
-        el.addEventListener('click', (e) => {
-            const href = el.getAttribute('href');
-            if (href === '#' || href === '') {
-                e.preventDefault();
-                showNotification('Feature coming soon', 'info');
-            }
-        });
-    });
+    // 3. Image Hover Parallelism (Pure CSS handled, but could add fallback here)
 });
+

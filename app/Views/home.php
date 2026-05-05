@@ -2,114 +2,146 @@
 
 <?= $this->section('content') ?>
 
-<!-- NuPhy Style Hero -->
-<section class="vp-hero">
-    <div class="container">
-        <div class="row align-items-center g-5">
-            <div class="col-lg-6" data-aos="fade-right">
-                <span class="hero-sub">Gaming Collection</span>
-                <h1 class="display-nuphy text-white">Hypernex <br> Field75</h1>
-                <p class="hero-copy">Engineered for a long term gaming experience, not a disposable setup upgrade. Precision, speed, and soul in every keystroke.</p>
-                <div class="hero-price">Rp 2.899.000</div>
-                <div class="d-flex flex-wrap gap-3">
-                    <a class="btn btn-primary-glow px-5" href="<?= base_url('/collection') ?>">
-                        Add to Cart <i class="bi bi-arrow-up-right ms-2"></i>
-                    </a>
-                    <a class="btn btn-soft px-5" href="<?= base_url('/collection') ?>">
-                        Buy Now <i class="bi bi-arrow-up-right ms-2"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-6" data-aos="zoom-in">
-                <div class="hero-image-main">
-                    <img src="https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?q=80&w=1200&auto=format&fit=crop" alt="NuPhy Style Keyboard" class="img-fluid floating-anim">
-                </div>
-            </div>
-        </div>
+<!-- ========== SECTION 1: HERO (100vh) ========== -->
+<section class="position-relative w-100" style="height: 100vh; margin-top: -85px; border-bottom: 1px solid var(--border);">
+    <!-- Background Image with Overlay -->
+    <div style="position: absolute; inset: 0; z-index: 1;">
+        <img src="https://images.unsplash.com/photo-1595225476474-87563907a212?q=80&w=1920&auto=format&fit=crop" alt="Hypernex Keyboard Setup" style="width: 100%; height: 100%; object-fit: cover;">
+        <!-- Dark Overlay for Text Visibility -->
+        <div style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.2) 40%, transparent 100%);"></div>
+    </div>
+    
+    <!-- Content Overlay (Bottom Left) -->
+    <div class="container-fluid px-4 px-lg-5 position-absolute w-100" style="bottom: 8vh; z-index: 2;">
+        <h1 style="font-size: clamp(2.5rem, 6vw, 5rem); font-family: 'Space Grotesk', sans-serif; font-weight: 700; line-height: 1; letter-spacing: -0.03em; color: #fff; text-transform: uppercase; margin-bottom: 0.5rem; text-shadow: 0 2px 10px rgba(0,0,0,0.2);">
+            SHOP NOW
+        </h1>
+        <p style="font-size: clamp(1.5rem, 4vw, 3rem); font-family: 'Space Grotesk', sans-serif; font-weight: 400; color: rgba(255,255,255,0.7); text-transform: uppercase; line-height: 1.1; letter-spacing: -0.02em; margin: 0;">
+            EXPLORE OUR FIRST<br>COLLECTION
+        </p>
+    </div>
+    
+    <!-- Slide Indicators -->
+    <div class="or-hero-indicators d-none d-lg-flex">
+        <span class="active">01</span>
+        <span>02</span>
+        <span>03</span>
+    </div>
+    
+    <!-- Scroll Text -->
+    <div class="or-hero-scroll d-none d-lg-block">Scroll</div>
+</section>
+
+<!-- ========== SECTION 2: MARQUEE TICKER ========== -->
+<div class="or-marquee">
+    <div class="or-marquee-track">
+        <span>✦ A Modern Expression of Precision</span>
+        <span>✦ Crafted for the Daily Ritual</span>
+        <span>✦ Engineered Without Compromise</span>
+        <span>✦ A Modern Expression of Precision</span>
+        <span>✦ Crafted for the Daily Ritual</span>
+        <span>✦ Engineered Without Compromise</span>
+        <span>✦ A Modern Expression of Precision</span>
+        <span>✦ Crafted for the Daily Ritual</span>
+        <span>✦ Engineered Without Compromise</span>
+        <span>✦ A Modern Expression of Precision</span>
+        <span>✦ Crafted for the Daily Ritual</span>
+        <span>✦ Engineered Without Compromise</span>
+    </div>
+</div>
+
+<!-- ========== SECTION 3: BRAND STORY SPLIT (Image | Text) ========== -->
+<section class="or-split">
+    <div class="or-split-media" data-aos="fade-right">
+        <img src="https://images.unsplash.com/photo-1617096819670-6de2869bbd2e?q=80&w=1200&auto=format&fit=crop" alt="Black and silver keyboard">
+    </div>
+    <div class="or-split-content" data-aos="fade-left">
+        <div class="or-split-eyebrow"><span class="font-serif me-2">01 /</span> About Us</div>
+        <h2 style="font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 500; line-height: 1.15; margin-bottom: 1.5rem; letter-spacing: -0.03em;">
+            We build instruments<br>for the <span class="font-serif">modern</span> workspace.
+        </h2>
+        <p class="or-split-text">
+            Every detail is a deliberate choice — from the click of each switch to the curve of every keycap. 
+            Hypernex exists for those who believe their tools should be as intentional as their craft.
+        </p>
+        <a href="<?= base_url('/collection') ?>" class="or-split-link">
+            Learn More <span>→</span>
+        </a>
     </div>
 </section>
 
-<!-- Features Grid -->
-<section class="container py-10">
-    <div class="text-center mb-10" data-aos="fade-up">
-        <p class="hero-sub">Our Top Picks</p>
-        <h2 class="display-nuphy fs-1">Precision Engineering for <br> Peak Performance</h2>
+<!-- ========== SECTION 4: PRODUCT GRID ========== -->
+<section class="container-fluid px-0 border-bottom border-dark" id="collection">
+    <div class="d-flex justify-content-between align-items-center px-4 px-lg-5 py-4 border-bottom border-dark">
+        <h2 class="m-0" style="font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700;">
+            <span class="font-serif me-2">02 /</span> Curated Store
+        </h2>
+        <a href="<?= base_url('/collection') ?>" class="text-dark text-decoration-none fw-bold text-uppercase" style="font-family: 'Space Grotesk', sans-serif; font-size: 0.8rem; letter-spacing: 0.05em;">
+            View All [<?= count($products) ?>]
+        </a>
     </div>
-    <div class="row g-4">
-        <div class="col-lg-4" data-aos="fade-up" data-aos-delay="0">
-            <div class="feature-card">
-                <div class="feature-icon"><i class="bi bi-broadcast"></i></div>
-                <h3>Instant Connection</h3>
-                <p>Seamlessly connects across all your devices. Instant pairing, no complicated setup. Immerse yourself in your work.</p>
+    
+    <div class="row g-0">
+        <?php foreach ($products as $index => $product): ?>
+            <div class="col-md-6 col-xl-4 <?= ($index % 3 !== 2) ? 'border-end border-dark' : '' ?> border-bottom border-dark">
+                <?= view('products/_card', ['product' => $product]) ?>
             </div>
-        </div>
-        <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
-            <div class="feature-card">
-                <div class="feature-icon"><i class="bi bi-controller"></i></div>
-                <h3>Intuitive Control</h3>
-                <p>The integrated control knob delivers tactile precision, empowering you to fine-tune, explore, and craft without losing focus.</p>
-            </div>
-        </div>
-        <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
-            <div class="feature-card">
-                <div class="feature-icon"><i class="bi bi-layers"></i></div>
-                <h3>Adaptable Design</h3>
-                <p>Craft a personalized workspace with built custom keys, shortcuts, and layouts. Design a setup that’s as dynamic as your imagination.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Collection Section -->
-<section class="container py-10" id="collection">
-    <div class="d-flex justify-content-between align-items-end mb-5">
-        <div>
-            <p class="hero-sub">Explore Store</p>
-            <h2 class="text-white h1 fw-bold">Gaming Masterpieces</h2>
-        </div>
-        <a href="<?= base_url('/collection') ?>" class="text-primary text-decoration-none fw-bold">View All <i class="bi bi-arrow-right"></i></a>
-    </div>
-    <div class="row g-4">
-        <?php foreach ($products as $product): ?>
-            <?= view('products/_card', ['product' => $product]) ?>
         <?php endforeach; ?>
     </div>
 </section>
 
-<!-- NuPhy CTA Masterpiece -->
-<section class="nuphy-cta text-center">
-    <div class="container" data-aos="zoom-in">
-        <div class="cta-content">
-            <h2 class="cta-title text-white">
-                Let's create your <br>
-                <span>next <i class="bi bi-arrow-right cta-arrow"></i> masterpiece</span>
-            </h2>
-            <a href="<?= base_url('/collection') ?>" class="btn btn-soft px-5 py-3">
-                Explore Products <i class="bi bi-arrow-up-right ms-2"></i>
-            </a>
-        </div>
+<!-- ========== SECTION 5: FULL-WIDTH LIFESTYLE IMAGE ========== -->
+<div class="or-fullwidth-img">
+    <img src="https://images.unsplash.com/photo-1546435770-a3e426bf472b?q=80&w=1920&auto=format&fit=crop" alt="Black wireless headphones between keyboard and mouse">
+</div>
+
+<!-- ========== SECTION 6: REVERSED BRAND SPLIT (Text | Image) ========== -->
+<section class="or-split reversed">
+    <div class="or-split-content" data-aos="fade-right">
+        <div class="or-split-eyebrow"><span class="font-serif me-2">03 /</span> The Ritual</div>
+        <h2 style="font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 500; line-height: 1.15; margin-bottom: 1.5rem; letter-spacing: -0.03em;">
+            Precision is a<br><span class="font-serif">daily</span> practice.
+        </h2>
+        <p class="or-split-text">
+            A keyboard is more than a tool — it's a companion for every idea you bring to life. 
+            We design for the ritual of creation, blending heritage craftsmanship with modern engineering.
+        </p>
+        <a href="<?= base_url('/collection') ?>" class="or-split-link">
+            Shop Now <span>→</span>
+        </a>
+    </div>
+    <div class="or-split-media" data-aos="fade-left">
+        <img src="https://images.unsplash.com/photo-1541140532154-b024d705b90a?q=80&w=1200&auto=format&fit=crop" alt="Keyboard Workspace">
     </div>
 </section>
 
-<style>
-    .py-10 { padding: 100px 0; }
-    .mb-10 { margin-bottom: 80px; }
-    
-    .floating-anim {
-        animation: floating 6s ease-in-out infinite;
-    }
-    
-    @keyframes floating {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-30px); }
-    }
-</style>
 
-<!-- AOS -->
+<!-- ========== SECTION 7: SECOND MARQUEE ========== -->
+<div class="or-marquee">
+    <div class="or-marquee-track">
+        <span>✦ Hypernex</span>
+        <span>✦ Tactile Mastery</span>
+        <span>✦ Built to Last</span>
+        <span>✦ Hypernex</span>
+        <span>✦ Tactile Mastery</span>
+        <span>✦ Built to Last</span>
+        <span>✦ Hypernex</span>
+        <span>✦ Tactile Mastery</span>
+        <span>✦ Built to Last</span>
+        <span>✦ Hypernex</span>
+        <span>✦ Tactile Mastery</span>
+        <span>✦ Built to Last</span>
+    </div>
+</div>
+
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
-    AOS.init({ duration: 1000, once: true });
+    AOS.init({
+        duration: 1000,
+        once: true,
+        easing: 'ease-out-cubic'
+    });
 </script>
 
 <?= $this->endSection() ?>

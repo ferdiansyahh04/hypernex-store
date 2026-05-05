@@ -1,62 +1,107 @@
 <?php $cartCount = array_sum(session('cart') ?? []); ?>
-<nav class="navbar navbar-expand-lg vp-nav sticky-top" id="mainNavbar">
-    <div class="container">
-        <a class="navbar-brand d-flex align-items-center gap-1" href="<?= base_url('/') ?>" style="font-family: 'Outfit', sans-serif;">
-            <span class="fw-bold text-white fs-3 tracking-tight">Hypernex</span>
-            <span class="text-primary fs-5 fw-normal" style="margin-top: -10px;">®</span>
-        </a>
+<nav class="navbar navbar-expand-lg vp-nav sticky-top py-4" id="mainNavbar">
+    <div class="container-fluid px-4 px-lg-5 d-flex justify-content-between align-items-center">
         
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation" style="border: none; padding: 0;">
-            <i class="bi bi-list fs-1 text-white"></i>
+        <!-- Left: Logo -->
+        <div class="nav-left" style="flex: 1;">
+            <a class="navbar-brand m-0" href="<?= base_url('/') ?>" style="font-family: 'Space Grotesk', sans-serif;">
+                <span class="fw-bold text-dark fs-4 tracking-tight">HYPERNEX</span>
+            </a>
+        </div>
+        
+        <!-- Center: Menu Toggle -->
+        <div class="nav-center text-center d-none d-lg-block" style="flex: 1;">
+            <button id="menuToggleText" class="btn btn-link text-dark text-decoration-none text-uppercase fw-bold p-0 d-flex align-items-center justify-content-center mx-auto" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" style="font-family: 'Space Grotesk', sans-serif; letter-spacing: 0.1em; font-size: 0.85rem;">
+                <span class="me-2">Menu</span>
+                <i class="bi bi-list fs-5"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile Toggle (Right aligned on mobile) -->
+        <button class="navbar-toggler border-0 p-0 d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+            <i class="bi bi-list fs-2 text-dark"></i>
         </button>
         
-        <div class="collapse navbar-collapse" id="mainNav">
-            <ul class="navbar-nav ms-auto align-items-lg-center gap-2 gap-lg-4 mt-3 mt-lg-0">
-                <li class="nav-item"><a class="nav-link" href="<?= base_url('/products') ?>">Products</a></li>
-                <li class="nav-item"><a class="nav-link" href="<?= base_url('/collection') ?>">Store</a></li>
-                <?php if (session('role') === 'admin'): ?>
-                    <li class="nav-item"><a class="nav-link" href="<?= base_url('/admin/products') ?>">Dashboard</a></li>
-                <?php endif; ?>
-                <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center" href="<?= base_url('/cart') ?>" aria-label="Cart">
-                        <i class="bi bi-cart3 fs-5 me-2"></i>
-                        <?php if ($cartCount > 0): ?>
-                            <span class="cart-pill"><?= esc($cartCount) ?></span>
-                        <?php endif; ?>
-                    </a>
-                </li>
-                <?php if (session('is_logged_in')): ?>
-                    <li class="nav-item dropdown">
-                        <button class="btn btn-soft dropdown-toggle w-100 w-lg-auto btn-sm" data-bs-toggle="dropdown">
-                            <?= esc(session('user_name')) ?>
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
-                            <li><span class="dropdown-item-text opacity-50 small text-uppercase fw-bold"><?= esc(session('role')) ?></span></li>
-                            <li><hr class="dropdown-divider border-white border-opacity-10"></li>
-                            <li>
-                                <form action="<?= base_url('/logout') ?>" method="post">
+        <!-- Right: Actions -->
+        <div class="nav-right d-none d-lg-flex justify-content-end align-items-center gap-4" style="flex: 1;">
+            <a href="#" class="nav-link text-dark fw-bold d-flex align-items-center" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" style="font-family: 'Space Grotesk', sans-serif; font-size: 0.8rem; letter-spacing: 0.1em;">
+                BAG <span class="ms-1">(<?= esc($cartCount) ?>)</span>
+            </a>
+        </div>
+    </div>
+    
+    <!-- Collapsible Menu Content -->
+    <div class="collapse position-absolute w-100 start-0 border-bottom border-dark" id="mainNav" style="top: 100%; z-index: 1000; background: var(--bg-dark) !important;">
+        <div class="container-fluid px-4 px-lg-5 py-5 border-top border-dark">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h5 class="text-uppercase text-muted mb-4" style="font-family: 'Space Grotesk', sans-serif; font-size: 0.75rem; letter-spacing: 0.1em;">Shop</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-3"><a href="<?= base_url('/') ?>" class="text-dark text-decoration-none fs-3 fw-bold text-uppercase" style="font-family: 'Space Grotesk', sans-serif;">Home</a></li>
+                        <li class="mb-3"><a href="<?= base_url('/collection') ?>" class="text-dark text-decoration-none fs-3 fw-bold text-uppercase" style="font-family: 'Space Grotesk', sans-serif;">Our Shop</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h5 class="text-uppercase text-muted mb-4" style="font-family: 'Space Grotesk', sans-serif; font-size: 0.75rem; letter-spacing: 0.1em;">Account</h5>
+                    <ul class="list-unstyled">
+                        <?php if (session('is_logged_in')): ?>
+                            <li class="mb-2"><span class="text-dark opacity-50 fw-bold small text-uppercase"><?= session('email') ?></span></li>
+                            <?php if (session('role') === 'admin'): ?>
+                                <li class="mb-3"><a href="<?= base_url('/admin/products') ?>" class="text-dark text-decoration-none fs-5 fw-bold text-uppercase" style="font-family: 'Space Grotesk', sans-serif;">Admin Portal</a></li>
+                            <?php endif; ?>
+                            <li class="mb-3">
+                                <form action="<?= base_url('/logout') ?>" method="post" class="m-0">
                                     <?= csrf_field() ?>
-                                    <button class="dropdown-item" type="submit">Logout</button>
+                                    <button type="submit" class="btn btn-link p-0 text-dark text-decoration-none fs-5 fw-bold text-uppercase" style="font-family: 'Space Grotesk', sans-serif;">Logout</button>
                                 </form>
                             </li>
-                        </ul>
-                    </li>
-                <?php else: ?>
-                    <li class="nav-item"><a class="nav-link" href="<?= base_url('/login') ?>">Login</a></li>
-                    <li class="nav-item"><a class="btn btn-primary-glow btn-sm px-4" href="<?= base_url('/register') ?>">Sign Up</a></li>
-                <?php endif; ?>
-            </ul>
+                        <?php else: ?>
+                            <li class="mb-3"><a href="<?= base_url('/login') ?>" class="text-dark text-decoration-none fs-5 fw-bold text-uppercase" style="font-family: 'Space Grotesk', sans-serif;">Login</a></li>
+                        <?php endif; ?>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </nav>
 
+<?= view('partials/offcanvas_cart') ?>
+
+<style>
+.vp-nav {
+    transition: background-color 0s, padding 0.3s ease;
+}
+.vp-nav.scrolled {
+    background-color: var(--bg-dark) !important;
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+    border-bottom: 1px solid var(--border) !important;
+}
+</style>
+
 <script>
-window.onscroll = function() {
+document.addEventListener('DOMContentLoaded', function() {
     var nav = document.getElementById('mainNavbar');
-    if (window.pageYOffset > 50) {
-        nav.classList.add('scrolled');
-    } else {
-        nav.classList.remove('scrolled');
+    var menuToggleBtn = document.getElementById('menuToggleText');
+    var mainNav = document.getElementById('mainNav');
+
+    window.onscroll = function() {
+        if (window.pageYOffset > 20) {
+            nav.classList.add('scrolled');
+        } else {
+            nav.classList.remove('scrolled');
+        }
+    };
+
+    if (mainNav && menuToggleBtn) {
+        mainNav.addEventListener('show.bs.collapse', function () {
+            menuToggleBtn.innerHTML = 'Close <i class="bi bi-x-lg fs-5 ms-2"></i>';
+        });
+        
+        mainNav.addEventListener('hide.bs.collapse', function () {
+            menuToggleBtn.innerHTML = '<span class="me-2">Menu</span> <i class="bi bi-list fs-5"></i>';
+        });
     }
-};
+});
 </script>
+
